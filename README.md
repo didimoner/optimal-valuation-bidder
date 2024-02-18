@@ -1,1 +1,1 @@
-# optimal-valuation-bidder
+# First-price auction optimal valuation bidder
