@@ -12,8 +12,8 @@ This repository contains implementation of the **Bidder** interface provided as 
 ### Explanation
 The bidder is based on the concept of valuation of a product.  
 
-V of a product pack (two items of Q) should be `2M/Q`, but there is a condition: get more product than the opponent to win.
-Based on that, the strategy is to spend M to win **HALF+1 rounds** in order to get more Q that the opponent.
+Valuation of a product pack (two items of the product) should be `2M/Q`, but there is a condition: get more product than the opponent to win.
+Based on that, the strategy is to spend cash to win **HALF+1 rounds** in order to get more product that the opponent.
 Since the product is auctioned always by 2 items, then total rounds number is `Q/2`.
 So, I should distribute M for `Q/4+1` of Q/2 total rounds.  
 **Optimal valuation** to win: `M/(Q/4 + 1)`  
@@ -25,19 +25,19 @@ So, I should distribute M for `Q/4+1` of Q/2 total rounds.
 3. Not enough money to make an optimal bid - save money (bid 0).
 
 #### Bids
-**The first bid** is `V/2`, because if win then net earning is V/2, if loss then I saved V/2 of M for future bids.
+**The first bid** is `V/2`, because if win then net earning is V/2, if loss then I saved V/2 of cash for future bids.
 
 Then, define what valuation to use: optimal or base. **Optimal valuation** is used when target number of products is not yet
-acquired. Otherwise, use  **base valuation** to get a chance to win product surplus and save money.
+acquired. Otherwise, use  **Base valuation** to get a chance to win product surplus and save money.
 
-**The default bid** is a random number between AVG and V if `AVG < V`.  
+**Default bid** is a random number between AVG and V if `AVG < V`.  
 Otherwise, bid 1 (just to counter opponent's possible zero bid).
 If there is not enough cash to cover the bid, save money (bid 0).
 
 **Counter bid** takes place when the opponent has less cash balance than my current valuation. It makes sense to bid 
 `opponent's M + 1` in order to definitely win the round.  
-If own M is equal to opponent's M, bid the whole amount to get a tie.
-Finally, if there is not enough M to cover the bid, save money (bid 0).
+If own cash balance is equal to opponent's cash balance, bid the whole amount to get a tie.
+Finally, if there is not enough cash to cover the bid, save money (bid 0).
 
 **Last chance bid** is used when there is only one round left to win or lose. It secures victory in case of winning and 
 avoids instant losing in the other case.  
