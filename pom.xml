@@ -4,7 +4,7 @@
 
     <groupId>com.didimoner</groupId>
     <artifactId>optimal-valuation-bidder</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>auction</name>
@@ -15,11 +15,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <jvm.options>--add-opens java.base/java.lang=ALL-UNNAMED</jvm.options>
-        <apache.log4j.version>2.22.1</apache.log4j.version>
+
         <junit.jupiter.version>5.10.1</junit.jupiter.version>
         <junit.platform.version>1.10.1</junit.platform.version>
         <assertj.version>3.25.3</assertj.version>
-        <maven.compiler.plugin.version>3.12.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
         <checkstyle.plugin.version>3.3.1</checkstyle.plugin.version>
         <puppycrawl.tools.checkstyle.version>10.13.0</puppycrawl.tools.checkstyle.version>
@@ -29,17 +28,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${apache.log4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${apache.log4j.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -78,12 +66,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

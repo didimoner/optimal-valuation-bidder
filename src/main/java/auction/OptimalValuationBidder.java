@@ -1,8 +1,5 @@
 package auction;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +9,6 @@ import static auction.Constants.PRODUCT_QUANTITY_PER_ROUND;
  * Custom implementation of the Bidder that uses strategy with valuation.
  */
 public class OptimalValuationBidder implements Bidder {
-
-    private static final Logger logger = LogManager.getLogger(OptimalValuationBidder.class);
 
     private static final int DEFAULT_SAVE_BID = 0;
 
@@ -32,15 +27,12 @@ public class OptimalValuationBidder implements Bidder {
     @Override
     public synchronized void init(int quantity, int cash) {
         if (quantity < PRODUCT_QUANTITY_PER_ROUND) {
-            logger.error("Cannot initialize the bidder: insufficient product quantity {}", quantity);
             throw new IllegalArgumentException("Insufficient product quantity");
         }
         if (cash <= 0) {
-            logger.error("Cannot initialize the bidder: insufficient cash {}", cash);
             throw new IllegalArgumentException("Insufficient cash");
         }
 
-        logger.debug("Initializing the bidder with {} product quantity and {} cash", quantity, cash);
         this.cashBalance = cash;
         this.totalCash = cash;
 
@@ -96,7 +88,6 @@ public class OptimalValuationBidder implements Bidder {
         checkInitialization();
 
         if (own < 0 || other < 0) {
-            logger.error("One of the bids is negative: own {}, other {}", own, other);
             throw new IllegalArgumentException("Bids cannot be negative");
         }
 
@@ -108,17 +99,11 @@ public class OptimalValuationBidder implements Bidder {
 
         this.cashBalance -= own;
         this.opponentBids.add(other);
-
-        logger.debug("Bids are made: own {}, other {}. Cash left: {}",
-                own, other, this.cashBalance);
-        logger.debug("Won auction rounds: {}, required minimum to win: {}",
-                this.wonRounds, getMinRoundsToWin());
     }
 
 
     private void checkInitialization() {
         if (!this.initialized) {
-            logger.error("The bidder has to be initialized before usage");
             throw new IllegalStateException("The bidder is not initialized");
         }
     }
